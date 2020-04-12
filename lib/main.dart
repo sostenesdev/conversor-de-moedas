@@ -144,7 +144,7 @@ class _HomeState extends State<Home> {
           labelText: label,
           labelStyle: TextStyle(color: Colors.amber),
         ),
-        keyboardType: TextInputType.number,
+        keyboardType: TextInputType.numberWithOptions(decimal: true),
         onChanged: f,
       ),
     );
