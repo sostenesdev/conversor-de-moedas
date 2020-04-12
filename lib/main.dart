@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -33,6 +34,24 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final realController = TextEditingController();
+  final dolarController = TextEditingController();
+  final euroController = TextEditingController();
+  void _realChange(String text){
+    double real = double.parse(text);
+    dolarController.text = (real/dolar).toStringAsFixed(2);
+    euroController.text = (real/euro).toStringAsFixed(2);
+  }
+  void _dolarChange(String text){
+    double dolar = double.parse(text);
+    realController.text = (dolar*this.dolar).toStringAsFixed(2);
+    euroController.text = (dolar*this.dolar/euro).toStringAsFixed(2);
+  }
+  void _euroChange(String text){
+    double euro = double.parse(text);
+    realController.text = (euro*this.euro).toStringAsFixed(2);
+    dolarController.text = (euro*this.euro/dolar).toStringAsFixed(2);
+  }
   double dolar;
   double real;
   double euro;
@@ -89,9 +108,9 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Icon(Icons.monetization_on, size: 150.0, color: Colors.amber,),
-                       buildTextField("Reais", "R\$"),
-                        buildTextField("Dolars", "\$"),
-                        buildTextField("Euros", "\€ ")
+                       buildTextField("Reais", "R\$ ", realController, _realChange),
+                        buildTextField("Dolars", "US\$ ", dolarController, _dolarChange),
+                        buildTextField("Euros", "\€ ", euroController, _euroChange)
                       ],
                     )
                 );
@@ -103,15 +122,18 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Widget buildTextField(String label, String prefix){
+  Widget buildTextField(String label, String prefix, TextEditingController c, Function f){
     return Padding(padding: EdgeInsets.only(top: 10),
       child: TextField(
+        controller: c,
         style: new TextStyle(color: Colors.amber),
         decoration: InputDecoration(
           prefixText: prefix,
           labelText: label,
           labelStyle: TextStyle(color: Colors.amber),
         ),
+        keyboardType: TextInputType.number,
+        onChanged: f,
       ),
     );
   }
