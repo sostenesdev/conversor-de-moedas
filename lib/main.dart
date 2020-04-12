@@ -89,36 +89,9 @@ class _HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         Icon(Icons.monetization_on, size: 150.0, color: Colors.amber,),
-                        Padding(padding: EdgeInsets.only(top: 10),
-                        child: TextField(
-                          style: new TextStyle(color: Colors.amber),
-                          decoration: InputDecoration(
-                            prefixText: "R\$ ",
-                            labelText: "Reais",
-                            labelStyle: TextStyle(color: Colors.amber),
-                          ),
-                        ),
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 10),
-                          child: TextField(
-                            style: new TextStyle(color: Colors.amber),
-                            decoration: InputDecoration(
-                              prefixText: "\$ ",
-                              labelText: "Dolar",
-                              labelStyle: TextStyle(color: Colors.amber),
-                            ),
-                          ),
-                        ),
-                        Padding(padding: EdgeInsets.only(top: 10),
-                          child: TextField(
-                            style: new TextStyle(color: Colors.amber),
-                            decoration: InputDecoration(
-                              prefixText: "\€ ",
-                              labelText: "Euro",
-                              labelStyle: TextStyle(color: Colors.amber),
-                            ),
-                          ),
-                        ),
+                       buildTextField("Reais", "R\$"),
+                        buildTextField("Dolars", "\$"),
+                        buildTextField("Euros", "\€ ")
                       ],
                     )
                 );
@@ -126,6 +99,19 @@ class _HomeState extends State<Home> {
               break;
           }
         },
+      ),
+    );
+  }
+
+  Widget buildTextField(String label, String prefix){
+    return Padding(padding: EdgeInsets.only(top: 10),
+      child: TextField(
+        style: new TextStyle(color: Colors.amber),
+        decoration: InputDecoration(
+          prefixText: prefix,
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.amber),
+        ),
       ),
     );
   }
