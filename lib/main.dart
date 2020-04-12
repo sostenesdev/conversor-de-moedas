@@ -13,9 +13,9 @@ void main() async {
       primaryColor: Colors.white,
       inputDecorationTheme: InputDecorationTheme(
         enabledBorder:
-        OutlineInputBorder(borderSide: BorderSide(color: Colors.white)),
-        focusedBorder:
         OutlineInputBorder(borderSide: BorderSide(color: Colors.amber)),
+        focusedBorder:
+        OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         hintStyle: TextStyle(color: Colors.amber),
       )),
   ));
@@ -84,8 +84,7 @@ class _HomeState extends State<Home> {
                 euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
 //                real = snapshot.data["results"]["currencies"]["BRL"]["buy"];
                 return SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10,right: 10, top: 10),
+                    padding: EdgeInsets.all(10.0),
                     child:Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
@@ -100,9 +99,28 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                         ),
+                        Padding(padding: EdgeInsets.only(top: 10),
+                          child: TextField(
+                            style: new TextStyle(color: Colors.amber),
+                            decoration: InputDecoration(
+                              prefixText: "\$ ",
+                              labelText: "Dolar",
+                              labelStyle: TextStyle(color: Colors.amber),
+                            ),
+                          ),
+                        ),
+                        Padding(padding: EdgeInsets.only(top: 10),
+                          child: TextField(
+                            style: new TextStyle(color: Colors.amber),
+                            decoration: InputDecoration(
+                              prefixText: "\€ ",
+                              labelText: "Euro",
+                              labelStyle: TextStyle(color: Colors.amber),
+                            ),
+                          ),
+                        ),
                       ],
                     )
-                  )
                 );
               }
               break;
