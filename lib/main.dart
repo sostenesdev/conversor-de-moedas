@@ -33,6 +33,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  double dolar;
+  double real;
+  double euro;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +80,30 @@ class _HomeState extends State<Home> {
                   ),
                 );
               } else {
-                return Container(color: Colors.green);
+                dolar = snapshot.data["results"]["currencies"]["USD"]["buy"];
+                euro = snapshot.data["results"]["currencies"]["EUR"]["buy"];
+//                real = snapshot.data["results"]["currencies"]["BRL"]["buy"];
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 10,right: 10, top: 10),
+                    child:Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Icon(Icons.monetization_on, size: 150.0, color: Colors.amber,),
+                        Padding(padding: EdgeInsets.only(top: 10),
+                        child: TextField(
+                          style: new TextStyle(color: Colors.amber),
+                          decoration: InputDecoration(
+                            prefixText: "R\$ ",
+                            labelText: "Reais",
+                            labelStyle: TextStyle(color: Colors.amber),
+                          ),
+                        ),
+                        ),
+                      ],
+                    )
+                  )
+                );
               }
               break;
           }
